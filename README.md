@@ -24,6 +24,11 @@ mkdir data
 vim download_cmu_arctic.sh
 ```
 
+  - [download_cmu_arctic.sh](https://github.com/Eurus-Holmes/WaveNet-Demo/blob/master/download_cmu_arctic.sh)
+
+```shell
+chmod a+x download_cmu_arctic.sh
+./download_cmu_arctic.sh
 ```
 
 ### 1. Preprocessing
