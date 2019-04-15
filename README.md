@@ -39,3 +39,28 @@ rm LJSpeech-1.1.tar.bz2
 ```
 
 ### 1. Preprocessing
+
+```
+python preprocess.py cmu_arctic ~/data/cmu_arctic ./data/cmu_arctic --preset=presets/cmu_arctic_8bit.json
+```
+
+Usage:
+
+```
+python preprocess.py ${dataset_name} ${dataset_path} ${out_dir} --preset=<json>
+```
+
+Supported `${dataset_name}`s for now are
+
+  - `cmu_arctic` (multi-speaker)
+  - `ljspeech` (single speaker)
+Assuming you use preset parameters known to work good for CMU ARCTIC dataset and have data in `~/data/cmu_arctic`, 
+then you can preprocess data by:
+
+```
+python preprocess.py cmu_arctic ~/data/cmu_arctic ./data/cmu_arctic --preset=presets/cmu_arctic_8bit.json
+```
+
+When this is done, you will see time-aligned extracted features (pairs of audio and mel-spectrogram) in `./data/cmu_arctic.`
+
+
