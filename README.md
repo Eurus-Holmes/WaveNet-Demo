@@ -61,14 +61,15 @@ then you can preprocess data by:
 ```
 python preprocess.py cmu_arctic ~/data/cmu_arctic ./data/cmu_arctic --preset=presets/cmu_arctic_8bit.json
 ```
+
+
 ----
 ### 2. Training
 
   - Training un-conditional WaveNet
 
 ```shell
-python train.py --data-root=./data/cmu_arctic/
-    --hparams="cin_channels=-1,gin_channels=-1"
+python train.py --data-root=./data/cmu_arctic/ --hparams="cin_channels=-1,gin_channels=-1"
 ```
 You have to disable global and local conditioning by setting gin_channels and cin_channels to negative values.
 
@@ -86,14 +87,20 @@ python train.py --data-root=./data/cmu_arctic/ \
     --hparams="cin_channels=80,gin_channels=16,n_speakers=7"
 ```
 
+When this is done, you will see time-aligned extracted features (pairs of audio and mel-spectrogram) in `./data/cmu_arctic.`
+
+----
 > Note: for multi gpu training, you have better ensure that batch_size % num_gpu == 0
 
 Usage:
 
+```shell
 python train.py --data-root=${data-root} --preset=<json> --hparams="parameters you want to override"
+```
+
 Important options:
 
---speaker-id=<n>: (Multi-speaker dataset only) it specifies which speaker of data we use for training. If this is not specified, all training data are used. This should only be specified when you are dealing with a multi-speaker dataset. For example, if you are trying to build a speaker-dependent WaveNet vocoder for speaker awb of CMU ARCTIC, then you have to specify --speaker-id=0. Speaker ID is automatically assigned as follows:
+  - `--speaker-id=<n>`: (Multi-speaker dataset only) it specifies which speaker of data we use for training. If this is not specified, all training data are used. This should only be specified when you are dealing with a multi-speaker dataset. For example, if you are trying to build a speaker-dependent WaveNet vocoder for speaker `awb` of CMU ARCTIC, then you have to specify `--speaker-id=0`. Speaker ID is automatically assigned as follows:
 
 ```python
 In [1]: from nnmnkwii.datasets import cmu_arctic
@@ -109,17 +116,30 @@ Out[2]:
  (5, 'rms'),
  (6, 'slt')]
 ```
-Training un-conditional WaveNet
-python train.py --data-root=./data/cmu_arctic/
-    --hparams="cin_channels=-1,gin_channels=-1"
+
+  - Training un-conditional WaveNet
+
+```shell
+python train.py --data-root=./data/cmu_arctic/ --hparams="cin_channels=-1,gin_channels=-1"
+```
 You have to disable global and local conditioning by setting gin_channels and cin_channels to negative values.
 
-Training WaveNet conditioned on mel-spectrogram
+  - Training WaveNet conditioned on mel-spectrogram
+
+```shell
 python train.py --data-root=./data/cmu_arctic/ --speaker-id=0 \
     --hparams="cin_channels=80,gin_channels=-1"
-Training WaveNet conditioned on mel-spectrogram and speaker embedding
+```
+
+  - Training WaveNet conditioned on mel-spectrogram and speaker embedding
+
+```shell
 python train.py --data-root=./data/cmu_arctic/ \
     --hparams="cin_channels=80,gin_channels=16,n_speakers=7"
-When this is done, you will see time-aligned extracted features (pairs of audio and mel-spectrogram) in `./data/cmu_arctic.`
+```
+
+----
+
+
 
 
