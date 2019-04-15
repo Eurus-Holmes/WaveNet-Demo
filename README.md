@@ -16,7 +16,6 @@ pip install -e ".[train]"
 
 ### 0. Download dataset
   - CMU ARCTIC (en): http://festvox.org/cmu_arctic/
-  - LJSpeech (en): https://keithito.com/LJ-Speech-Dataset/
 
 ```shell
 cd ~
@@ -29,6 +28,13 @@ vim download_cmu_arctic.sh
 ```shell
 chmod a+x download_cmu_arctic.sh
 ./download_cmu_arctic.sh
+```
+
+  - LJSpeech (en): https://keithito.com/LJ-Speech-Dataset/
+  
+```shell
+wget -c https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2
+
 ```
 
 ### 1. Preprocessing
