@@ -34,7 +34,8 @@ chmod a+x download_cmu_arctic.sh
   
 ```shell
 wget -c https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2
-
+tar -jxvf LJSpeech-1.1.tar.bz2
+rm LJSpeech-1.1.tar.bz2
 ```
 
 ### 1. Preprocessing
