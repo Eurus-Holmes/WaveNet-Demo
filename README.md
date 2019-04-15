@@ -62,6 +62,7 @@ then you can preprocess data by:
 python preprocess.py cmu_arctic ~/data/cmu_arctic ./data/cmu_arctic --preset=presets/cmu_arctic_8bit.json
 ```
 
+When this is done, you will see time-aligned extracted features (pairs of audio and mel-spectrogram) in `./data/cmu_arctic.`
 
 ----
 ### 2. Training
@@ -86,8 +87,6 @@ python train.py --data-root=./data/cmu_arctic/ --speaker-id=0 \
 python train.py --data-root=./data/cmu_arctic/ \
     --hparams="cin_channels=80,gin_channels=16,n_speakers=7"
 ```
-
-When this is done, you will see time-aligned extracted features (pairs of audio and mel-spectrogram) in `./data/cmu_arctic.`
 
 ----
 > Note: for multi gpu training, you have better ensure that batch_size % num_gpu == 0
