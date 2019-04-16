@@ -138,7 +138,20 @@ python train.py --data-root=./data/cmu_arctic/ \
 ```
 
 ----
+### 3. Monitor with Tensorboard
 
+```shell
+ssh -L 16006:127.0.0.1:6006 account@server.address
+tensorboard --logdir=log
+```
+
+And then, http://127.0.0.1:16006/
+
+> Logs are dumped in ./log directory by default. You can monitor logs by tensorboard:
+
+```shell
+tensorboard --logdir=log
+```
 
 
 
