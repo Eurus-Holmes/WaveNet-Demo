@@ -153,5 +153,54 @@ And then, http://127.0.0.1:16006/
 tensorboard --logdir=log
 ```
 
+----
+### 4. Synthesize from a checkpoint
 
+Usage:
+
+```shell
+python synthesis.py ${checkpoint_path} ${output_dir} --preset=<json> --hparams="parameters you want to override"
+```
+
+Important options:
+
+  - `--length=<n>`: (Un-conditional WaveNet only) Number of time steps to generate.
+  - `--conditional=<path>`: (Required for onditional WaveNet) Path of local conditional features (.npy). If this is specified, number of time steps to generate is determined by the size of conditional feature.
+
+e.g.,
+
+```shell
+python synthesis.py --hparams="parameters you want to override" \
+    checkpoints_awb/checkpoint_step000100000.pth \
+    generated/test_awb \
+    --conditional=./data/cmu_arctic/cmu_arctic-mel-00001.npy
+```
+
+
+----
+### Misc
+
+### Synthesize audio samples for testset
+
+Usage:
+
+```shell
+python evaluate.py ${checkpoint_path} ${output_dir} --data-root="data location"\
+    --preset=<json> --hparams="parameters you want to override"
+```
+
+This script is used for generating sounds for https://r9y9.github.io/wavenet_vocoder/.
+
+Options:
+
+  - `--data-root`: Data root. This is required to collect testset.
+  - `--num-utterances`: (For multi-speaker model) number of utterances to be generated per speaker. This is useful especially when testset is large and don't want to generate all utterances. For single speaker dataset, you can hit `ctrl-c` whenever you want to stop evaluation.
+
+e.g.,
+
+```shell
+python evaluate.py --data-root=./data/cmu_arctic/ \
+    ./checkpoints_awb/checkpoint_step000100000.pth \
+    ./generated/cmu_arctic_awb
+```
 
